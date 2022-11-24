@@ -20,15 +20,15 @@ services:
       # - memcached
     restart: unless-stopped
     volumes:
-      - ./dockerdrupal/config/custom_php.ini:/opt/drupal/custom_php.ini
-      - ./dockerdrupal/config/sync:/opt/drupal/config/sync
-      - ./dockerdrupal/web/modules:/opt/drupal/web/modules
-      - ./dockerdrupal/web/themes:/opt/drupal/web/themes
-      - ./dockerdrupal/web/profiles:/opt/drupal/web/profiles
-      - ./dockerdrupal/web/libraries:/opt/drupal/web/libraries
-      - ./dockerdrupal/web/sites:/opt/drupal/web/sites
-      - ./dockerdrupal/composer.json:/opt/drupal/composer.json
-      - ./dockerdrupal/composer.lock:/opt/drupal/composer.lock
+      - ./drupal9/config/custom_php.ini:/opt/drupal/custom_php.ini
+      - ./drupal9/config/sync:/opt/drupal/config/sync
+      - ./drupal9/web/modules:/opt/drupal/web/modules
+      - ./drupal9/web/themes:/opt/drupal/web/themes
+      - ./drupal9/web/profiles:/opt/drupal/web/profiles
+      - ./drupal9/web/libraries:/opt/drupal/web/libraries
+      - ./drupal9/web/sites:/opt/drupal/web/sites
+      - ./drupal9/composer.json:/opt/drupal/composer.json
+      - ./drupal9/composer.lock:/opt/drupal/composer.lock
 
   # memcached:
   #   container_name: memcached
