@@ -1,0 +1,40 @@
+version: "3"
+
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - db-data:/var/lib/mysql
+
+  drupal:
+    build: .
+    container_name: drupal
+    ports:
+      - 8080:80
+    depends_on:
+      - mysql
+      # - memcached
+    restart: unless-stopped
+    volumes:
+      - ./dockerdrupal/config/custom_php.ini:/opt/drupal/custom_php.ini
+      - ./dockerdrupal/config/sync:/opt/drupal/config/sync
+      - ./dockerdrupal/web/modules:/opt/drupal/web/modules
+      - ./dockerdrupal/web/themes:/opt/drupal/web/themes
+      - ./dockerdrupal/web/profiles:/opt/drupal/web/profiles
+      - ./dockerdrupal/web/libraries:/opt/drupal/web/libraries
+      - ./dockerdrupal/web/sites:/opt/drupal/web/sites
+      - ./dockerdrupal/composer.json:/opt/drupal/composer.json
+      - ./dockerdrupal/composer.lock:/opt/drupal/composer.lock
+
+  # memcached:
+  #   container_name: memcached
+  #   image: memcached:latest
+  #   ports:
+  #     - "11211:11211"
+
+volumes:
+  db-data:
